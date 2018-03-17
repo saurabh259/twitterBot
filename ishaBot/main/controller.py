@@ -43,13 +43,20 @@ def runBot():
         access_token_secret=request.form['access_token_secret']
 
     elif request.form['submit'] == 'parseKey':
-        file = request.files['file']        
-        myfile = file.read()
-        file = json.loads(myfile)
-        consumer_key=file['consumer_key']
-        consumer_secret=file['consumer_secret']
-        access_token_key=file['access_token_key']
-        access_token_secret=file['access_token_secret']
+        # bad file upload
+        try:
+            file = request.files['file']        
+            myfile = file.read()
+            file = json.loads(myfile)
+            consumer_key=file['consumer_key']
+            consumer_secret=file['consumer_secret']
+            access_token_key=file['access_token_key']
+            access_token_secret=file['access_token_secret']
+        except Exception as e:
+            print('Bad file uploaded')
+            print(e)
+            return render_template("index.html",error=True)
+
 
     try:
         api = twitter.Api(consumer_key=consumer_key,
