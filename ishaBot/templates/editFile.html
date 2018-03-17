@@ -1,0 +1,99 @@
+<!doctype html>
+<html>
+
+   <head>
+      <!-- Latest compiled and minified CSS -->
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
+
+    <!-- jQuery library -->
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
+
+    <!-- Latest compiled JavaScript -->
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
+
+    <style>
+      .vl {
+          border-left: 1px solid #ddd;
+          height: 500px;
+      }
+
+      .pullDownLeft{
+        margin-top: 35%;
+      }
+
+      .pullDownMiddle{
+        margin-top:  39%;
+
+      }
+
+      .pullDownRight{
+        margin-top: 6%;
+      }
+    </style>
+   </head>
+   <body>
+
+   <div class="container-fluid">
+
+      <div id="top-image">
+        <img src="{{ url_for('static', filename = 'bg2.png') }}" width="100%" height="400">
+      </div>
+
+      <div class="row">
+          
+          <div class="col-sm-8">
+            <h3>Namaskaram _/\_</h3>
+          </div>
+
+          <div class="col-sm-4">
+            <a href="/admin/logout"><button class="btn btn-default btn-lg pull-right"> Logout </button></a>
+          </div>
+
+
+      </div>
+
+      <div class="row">
+        
+        {% if (error==True) %}
+              <div class="alert alert-danger fade in alert-dismissible">
+                  <a href="#" class="close" data-dismiss="alert" aria-label="close">&times;</a>
+                <strong>Error!</strong> Please check your file.
+            </div>
+        
+        {% else %}
+        <div class="col-sm-8">
+          {% if tweetList|length ==0 %}
+            <h5>No file found on server . Please upload.</h5>
+
+            {% else %}
+            <h5>Following is the current target tweet list with <strong><em>Total Count -{{tweetList|length}}</em></strong></h5>
+            <ul class="list-group">
+              {% for tweet in tweetList%}
+                <li class="list-group-item">{{tweet}}</li>
+              {% endfor %}
+            </ul>
+          {% endif %}
+        </div>
+        {% endif %}
+        <div class="col-sm-4 pullDownRight">
+          <form id="fileUpload" action="/admin/uploadFile" method="post" enctype="multipart/form-data">
+          <label class="btn btn-primary btn-lg btn-file ">
+              Upload Tweet File <input id="file" type="file" name="file" style="display: none;">
+          </label>          
+          <input id="submit" type="submit" name="submit" value="uploadFile" style="display:none;">
+        </form>
+        
+        </div>
+
+      </div>
+    </div>
+
+    </body>
+    </html>
+
+<script type="text/javascript">
+  
+  $("#file").change(function(){
+    $("#submit").click();
+ });
+</script>
