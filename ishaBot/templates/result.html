@@ -19,9 +19,22 @@
    		<div id="top-image">
    			<img src="{{ url_for('static', filename = 'bg2.png') }}" width="100%" height="400">
    		</div>
-   		<h3> Namaskaram _/\_ </h3>
-   		<p>Thank you for taking out your time to run this BOT<p>
-   		<p> BOT ran for <strong>{{name}}</strong> with screen name <strong><em>{{screenName}}</em></strong>. Results of which are summarized below</p>
+   		
+
+      	<div class="row">
+          
+          <div class="col-sm-8">
+            <h3> Namaskaram _/\_ </h3>
+	   		<p>Thank you for taking out your time to run this BOT<p>
+	   		<p> BOT ran for <strong>{{name}}</strong> with screen name <strong><em>{{screenName}}</em></strong>. Results of which are summarized below</p>
+          </div>
+
+          <div class="col-sm-4">
+            <a href="/"><button class="btn btn-default btn-lg pull-right"> Home </button></a>
+          </div>
+
+
+      </div>
 	   	
 	   	<div class="table-responsive table-hover">          
 		  <table class="table">
