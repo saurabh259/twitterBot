@@ -47,6 +47,9 @@
 
    <body>
 
+   <audio id="my_audio" src="{{ url_for('static', filename = 'bg.mp3') }}" loop="loop"></audio>
+
+
    <div class="container-fluid">
 
       <div id="top-image">
@@ -73,7 +76,7 @@
 	        <h5><p>Namaskaram , Welcome to Isha Tweet Bot</p>
 	        <p>In order to use the bot , you need to provide 4 keys as you can see in the main page . Steps to retrieve these 4 keys for your twitter account is explained below -</p></h5>
 	        <ul class="list-group">
-			  <li class="list-group-item"><strong>Step 1</strong> - Go to <a href="https://apps.twitter.com">https://apps.twitter.com</a></li>
+			  <li class="list-group-item"><strong>Step 1</strong> - Go to <a href="https://apps.twitter.com" target="_blank">https://apps.twitter.com</a> and sign in</li>
 			  <li class="list-group-item"><strong>Step 2</strong> -  Click on Create New App </li>
 			  <li class="list-group-item"><strong>Step 3</strong> -  Fill the required<span style='color:red'>(*)</span> fields , if you don't have any website , you can give your Facebook/Linked In profile link for the 'website' inputbox and submit the form.</li>
 			  <li class="list-group-item"><strong>Step 4</strong> - In your app main page , goto Keys and Access Tokens tab</li>
@@ -175,7 +178,10 @@
 
 <script type="text/javascript">
 	
-	$('.tool_tip').tooltip({trigger:'manual'}).tooltip('show');
+	$(document).ready(function() {
+		$('.tool_tip').tooltip({trigger:'manual'}).tooltip('show');
+    	$("#my_audio").get(0).play();
+});
 
 
 	$("#file").change(function(){
