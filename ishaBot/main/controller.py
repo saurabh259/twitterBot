@@ -4,6 +4,8 @@ import json
 import os
 import csv
 import time
+import datetime
+from dateutil import tz
 from ishaBot.settings import APP_STATIC
 
 
@@ -12,7 +14,16 @@ main = Blueprint('main', __name__)
 
 @main.route('/')
 def index():
-    return render_template("index.html")
+    timestamp = os.path.getmtime(os.path.join(APP_STATIC, 'tweets.csv'))
+    localTime = datetime.datetime.fromtimestamp(
+        int(timestamp)
+    ).strftime('%d-%m-%Y %H:%M')
+
+    localTime = datetime.datetime.strptime(localTime,'%d-%m-%Y %H:%M')
+    istTime = localTime.astimezone(tz.gettz('Asia/Kolkata'))
+    istTime = istTime.strftime('%d-%m-%Y %H:%M')
+
+    return render_template("index.html",last_modified=istTime)
 
 
 @main.route('runbot',methods=['POST'])

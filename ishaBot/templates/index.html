@@ -36,6 +36,15 @@
 			  padding-top:12px;
 			}
 
+			.footer {
+			    /*position: fixed;*/
+			    left: 0;
+			    bottom: 0;
+			    width: 100%;
+			    background-color: black;
+			    color: white;
+			    text-align: center;
+			}
 			/*body {
 			    background-image: url("{{ url_for('static', filename = 'bg2.png') }}");
 			    background-repeat: no-repeat;
@@ -47,16 +56,21 @@
 
    <body>
 
+   <audio id="my_audio" src="{{ url_for('static', filename = 'bg.mp3') }}" loop="loop"></audio>
+
+
    <div class="container-fluid">
 
       <div id="top-image">
         <img src="{{ url_for('static', filename = 'bg2.png') }}" width="100%" height="400">
       </div>
 
+      		<h5 class="pull-right">Tweets' list last updated:<strong>{{last_modified}}</strong></h5>
 
  	<div class="navsBar">
 		<h3 id="helpIcon" data-toggle="modal"  data-target="#myModal">&nbsp;&nbsp;&nbsp;<span 
 		data-toggle="tooltip" title="Namaskaram , Click me for assistance :)" class="tool_tip glyphicon glyphicon-question-sign pull-left"></span></h3>
+
 	</div>
 
 	<!-- Modal -->
@@ -73,7 +87,7 @@
 	        <h5><p>Namaskaram , Welcome to Isha Tweet Bot</p>
 	        <p>In order to use the bot , you need to provide 4 keys as you can see in the main page . Steps to retrieve these 4 keys for your twitter account is explained below -</p></h5>
 	        <ul class="list-group">
-			  <li class="list-group-item"><strong>Step 1</strong> - Go to <a href="https://apps.twitter.com">https://apps.twitter.com</a></li>
+			  <li class="list-group-item"><strong>Step 1</strong> - Go to <a href="https://apps.twitter.com" target="_blank">https://apps.twitter.com</a> and sign in</li>
 			  <li class="list-group-item"><strong>Step 2</strong> -  Click on Create New App </li>
 			  <li class="list-group-item"><strong>Step 3</strong> -  Fill the required<span style='color:red'>(*)</span> fields , if you don't have any website , you can give your Facebook/Linked In profile link for the 'website' inputbox and submit the form.</li>
 			  <li class="list-group-item"><strong>Step 4</strong> - In your app main page , goto Keys and Access Tokens tab</li>
@@ -167,6 +181,11 @@
 
 
 	</div>
+
+	<div class="footer">
+		<p>Made with <span style="color: #e25555;">&hearts;</span> and gratitude _/\_</p>
+		<p>In case of any issues using BOT , whatsapp @9424685150</p>
+	</div>
 </div>
       
    </body>
@@ -175,7 +194,10 @@
 
 <script type="text/javascript">
 	
-	$('.tool_tip').tooltip({trigger:'manual'}).tooltip('show');
+	$(document).ready(function() {
+		$('.tool_tip').tooltip({trigger:'manual'}).tooltip('show');
+    	$("#my_audio").get(0).play();
+});
 
 
 	$("#file").change(function(){
