@@ -33,7 +33,7 @@ def runBot():
 
         return Response(content, 
             mimetype='application/json',
-            headers={'Content-Disposition':'attachment;filename=zones.geojson'})
+            headers={'Content-Disposition':'attachment;filename=ishaTwitterBot.json'})
 
     if request.form['submit'] == 'runBot':
 
