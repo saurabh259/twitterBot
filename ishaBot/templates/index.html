@@ -18,16 +18,22 @@
 			}
 
 			.pullDownLeft{
-				margin-top: 5%;
+				margin-top: 0%;
 			}
 
 			.pullDownMiddle{
-				margin-top:  9%;
+				margin-top:  2%;
 
 			}
 
 			.pullDownRight{
-				margin-top: 10%;
+				margin-top: 3%;
+			}
+
+			#helpIcon
+			{
+			  cursor: pointer;
+			  padding-top:12px;
 			}
 
 			/*body {
@@ -43,11 +49,55 @@
 
    <div class="container-fluid">
 
-
       <div id="top-image">
         <img src="{{ url_for('static', filename = 'bg2.png') }}" width="100%" height="400">
       </div>
 
+
+ 	<div class="navsBar">
+		<h3 id="helpIcon" data-toggle="modal"  data-target="#myModal">&nbsp;&nbsp;&nbsp;<span 
+		data-toggle="tooltip" title="Namaskaram , Click me for assistance :)" class="tool_tip glyphicon glyphicon-question-sign pull-left"></span></h3>
+	</div>
+
+	<!-- Modal -->
+	<div id="myModal" class="modal fade" role="dialog">
+	  <div class="modal-dialog">
+
+	    <!-- Modal content-->
+	    <div class="modal-content">
+	      <div class="modal-header">
+	        <button type="button" class="close" data-dismiss="modal">&times;</button>
+	        <h4 class="modal-title">Help Guide</h4>
+	      </div>
+	      <div class="modal-body">
+	        <h5><p>Namaskaram , Welcome to Isha Tweet Bot</p>
+	        <p>In order to use the bot , you need to provide 4 keys as you can see in the main page . Steps to retrieve these 4 keys for your twitter account is explained below -</p></h5>
+	        <ul class="list-group">
+			  <li class="list-group-item"><strong>Step 1</strong> - Go to <a href="https://apps.twitter.com">https://apps.twitter.com</a></li>
+			  <li class="list-group-item"><strong>Step 2</strong> -  Click on Create New App </li>
+			  <li class="list-group-item"><strong>Step 3</strong> -  Fill the required<span style='color:red'>(*)</span> fields , if you don't have any website , you can give your Facebook/Linked In profile link for the 'website' inputbox and submit the form.</li>
+			  <li class="list-group-item"><strong>Step 4</strong> - In your app main page , goto Keys and Access Tokens tab</li>
+  			  <li class="list-group-item"><strong>Step 5</strong> - Scroll to bottom and click on Create my access token</li>
+  			  <li class="list-group-item"><strong>Step 6</strong> - Give yourself a pat on the back for making it this far and <em>Note down the 4 fields required for our tweet bot namely <strong>Consumer Key,Consumer Secret ,Access Token,Access Token Secret</strong></em></li>
+			</ul>
+			<h5>Using the BOT</h5>
+			<ul class="list-group">
+				<li class="list-group-item"> Enter the tokens/keys you retrieved after the above listed steps.</li>
+				<li class="list-group-item"><strong><em>CLICK ON 'Save key file' BUTTON BEFORE RUNNING THE BOT </em></strong>, if you don't want to copy-paste keys everytime to run the bot</li>
+				<li class="list-group-item">Keep the downloaded key secure with you and from the next time you can simply upload this key to run the bot , no need to fill the form again</li>
+				<li class="list-group-item">Lastly , simply click on Run Bot and it'll show you the results</li>
+			</ul><br>
+			<span class="pull-right"><em>** Be smart , use downlaoded key from the next time onwards</em></span><br>
+			<span class="pull-right"><em>*** This BOT <strong>doesn't</strong> store your access tokens/keys</em></span><br>
+
+	      </div>
+	      <div class="modal-footer">
+	        <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+	      </div>
+	    </div>
+
+	  </div>
+	</div>
 
    	 <div class="row">
    	 	<div class="col-sm-8 pullDownLeft">
@@ -125,10 +175,17 @@
 
 <script type="text/javascript">
 	
+	$('.tool_tip').tooltip({trigger:'manual'}).tooltip('show');
+
+
 	$("#file").change(function(){
 		$("#submit").click();
 		// document.getElementById("fileUpload").submit();
  });
+
+	$(".navsBar").click(function(){
+		$('.tool_tip').tooltip({trigger:'manual'}).tooltip('hide');
+	});
 
 	function downloadKey(){
  		$("#twitterDetails").ajaxSubmit({url: 'downloadKey', type: 'post'});
