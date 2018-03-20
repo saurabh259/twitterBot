@@ -2,3 +2,4 @@ Flask
 gunicorn
 python-twitter
 python-dateutil
+psycopg2

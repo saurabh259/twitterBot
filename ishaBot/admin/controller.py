@@ -3,6 +3,7 @@ from ishaBot.settings import APP_STATIC
 import os
 import csv
 import time
+from ishaBot.database.db import *
 
 
 admin = Blueprint('admin', __name__)
@@ -25,12 +26,10 @@ def login():
         tweetList=[]
 
         try:
-            with open(os.path.join(APP_STATIC, 'tweets.csv'), "r") as file:
-                reader = csv.reader(file)
-                for line in reader:
-                    tweetList.append(line[0])
+            for tweet in loadTweets():
+                tweetList.append(tweet[0])
         except:
-            print('No file present')
+            print('Error reading tweets')
 
         return render_template("editFile.html",tweetList=tweetList)
 
@@ -41,16 +40,14 @@ def login():
 @admin.route('/uploadFile',methods=['POST'])
 def uploadFile():
 
+    clearDb()
     file = request.files['file']        
     myfile = file.read()
     try:
         myFile = (myfile).decode('utf-8').split('\n')
-        with open(os.path.join(APP_STATIC, 'tweets.csv'), "w+") as file:
-            f = csv.writer(file)
-            for line in myFile:
-                f.writerow([line])
+        insertTweetsBulk(myFile)    
     except Exception as e:
-        print('Exception occured while writing tweets to file')
+        print('Exception occured while writing tweets to db')
         print(e)
         return render_template("editFile.html",error=True)
 
