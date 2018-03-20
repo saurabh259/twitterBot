@@ -15,10 +15,7 @@ main = Blueprint('main', __name__)
 
 @main.route('/')
 def index():
-    timestamp = os.path.getmtime(os.path.join(APP_STATIC, 'tweets.csv'))
-    localTime = datetime.datetime.fromtimestamp(
-        int(timestamp)
-    ).strftime('%d-%m-%Y %H:%M')
+    localTime = datetime.datetime.utcnow().strftime('%d-%m-%Y %H:%M')
     print(localTime)
     localTime = datetime.datetime.strptime(localTime,'%d-%m-%Y %H:%M')
     istTime = localTime.astimezone(tz.gettz('Asia/Kolkata'))
