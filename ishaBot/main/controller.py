@@ -15,12 +15,10 @@ main = Blueprint('main', __name__)
 
 @main.route('/')
 def index():
-    localTime = datetime.datetime.utcnow().strftime('%d-%m-%Y %H:%M')
-    print(localTime)
+    localTime = getUpdationTime()
     localTime = datetime.datetime.strptime(localTime,'%d-%m-%Y %H:%M')
     istTime = localTime.astimezone(tz.gettz('Asia/Kolkata'))
     istTime = istTime.strftime('%d-%m-%Y %H:%M')
-    print(istTime)
     return render_template("index.html",last_modified=istTime)
 
 
